@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow authenticated users to read/write documents with code "9999" or "552499"
+    // All devices using the same code will see the same data
+    match /inventory/{code} {
+      allow read, write: if request.auth != null && 
+                            (code == "9999" || code == "552499");
+    }
+    
+    match /settings/{code} {
+      allow read, write: if request.auth != null && 
+                            (code == "9999" || code == "552499");
+    }
+    
+    match /audit/{code} {
+      allow read, write: if request.auth != null && 
+                            (code == "9999" || code == "552499");
+    }
+    
+    match /counts/{code} {
+      allow read, write: if request.auth != null && 
+                            (code == "9999" || code == "552499");
+    }
+  }
+}
+
